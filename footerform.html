@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subscribe Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f8f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .footerform-container {
+        background: #f7f8f8;
+        padding: 20px;
+        border-radius: 8px;
+        width: 320px;
+      }
+
+      .footerform-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: #111;
+      }
+
+      .footerform-label::after {
+        content: " *";
+        color: #5da9f6;
+        font-size: 14px;
+      }
+
+      .footerform-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+      }
+
+      .footerform-input::placeholder {
+        color: #aaa;
+      }
+
+      .footerform-button {
+        background-color: #1e3b2c;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 12px 0;
+        width: 120px;
+        border: none;
+        border-radius: 24px;
+        cursor: pointer;
+        display: block;
+      }
+
+      .footerform-button:hover {
+        background-color: #173024;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="footerform-container">
+      <form>
+        <label for="footerform-name" class="footerform-label">Your Name</label>
+        <input
+          type="text"
+          id="footerform-name"
+          class="footerform-input"
+          placeholder="John Doe"
+          required
+        />
+
+        <label for="footerform-email" class="footerform-label">Email</label>
+        <input
+          type="email"
+          id="footerform-email"
+          class="footerform-input"
+          placeholder="example@mail.com"
+          required
+        />
+
+        <button type="submit" class="footerform-button">Subscribe</button>
+      </form>
+    </div>
+  </body>
+</html>

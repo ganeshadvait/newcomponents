@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Services</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: #fafafa;
+        padding: 60px 20px;
+      }
+
+      .services-section {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 60px;
+      }
+
+      .header-content h1 {
+        font-size: 48px;
+        font-weight: 400;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+      }
+
+      .header-content p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        max-width: 600px;
+      }
+
+      .nav-arrows {
+        display: flex;
+        gap: 12px;
+      }
+
+      .nav-arrow {
+        width: 48px;
+        height: 48px;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .nav-arrow:hover {
+        background: #f5f5f5;
+        border-color: #ccc;
+      }
+
+      .nav-arrow:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+        display: none;
+      }
+
+      .nav-arrow svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .cards-container {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cards-wrapper {
+        display: flex;
+        gap: 24px;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .service-card {
+        min-width: 340px;
+        background: white;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .card-visual {
+        width: 100%;
+        height: 220px;
+        border-radius: 12px;
+        margin-bottom: 28px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-media-visual {
+        background: linear-gradient(
+          135deg,
+          #ffd6d6 0%,
+          #ffe8e8 50%,
+          #fff5f5 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .phone-mockup {
+        width: 180px;
+        height: 200px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        padding: 12px;
+        position: relative;
+      }
+
+      .phone-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .avatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #ffcccb;
+      }
+
+      .username {
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .phone-content {
+        width: 100%;
+        height: 140px;
+        background: linear-gradient(180deg, #ffb3ba 0%, #ffe0e5 100%);
+        border-radius: 12px;
+      }
+
+      .dots {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #ddd;
+      }
+
+      .dot.active {
+        background: #666;
+      }
+
+      .seo-visual {
+        background: linear-gradient(135deg, #fff9e6 0%, #fffdf5 100%);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .search-box {
+        background: white;
+        border-radius: 8px;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .search-text {
+        font-size: 12px;
+        color: #999;
+      }
+
+      .search-icon {
+        width: 16px;
+        height: 16px;
+        color: #999;
+      }
+
+      .result-item {
+        background: white;
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+      }
+
+      .result-bar {
+        height: 8px;
+        border-radius: 4px;
+        flex: 1;
+        max-width: 120px;
+      }
+
+      .result-value {
+        font-size: 10px;
+        color: #999;
+        margin-left: 12px;
+      }
+
+      .analytics-visual {
+        background: linear-gradient(135deg, #ffe6f0 0%, #fff5f9 100%);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chart-title {
+        font-size: 11px;
+        color: #666;
+        font-weight: 600;
+      }
+
+      .chart-change {
+        font-size: 10px;
+        color: #ff6b9d;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .bars-container {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        height: 100px;
+        margin-top: 8px;
+      }
+
+      .bar {
+        flex: 1;
+        background: linear-gradient(180deg, #ff9db8 0%, #ffb3ca 100%);
+        border-radius: 6px 6px 0 0;
+        min-height: 20px;
+        opacity: 0.7;
+      }
+
+      .bar.highlight {
+        opacity: 1;
+        background: linear-gradient(180deg, #ff6b9d 0%, #ff8ab3 100%);
+      }
+
+      .funnel-visual {
+        background: linear-gradient(135deg, #fff4e6 0%, #fffbf5 100%);
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .funnel-chart {
+        width: 100%;
+        height: 140px;
+        position: relative;
+      }
+
+      .funnel-layer {
+        width: 100%;
+        height: 28px;
+        background: linear-gradient(90deg, #ffb366 0%, #ffd699 100%);
+        margin-bottom: 8px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: white;
+        box-shadow: 0 2px 8px rgba(255, 140, 0, 0.15);
+      }
+
+      .funnel-layer:nth-child(2) {
+        width: 85%;
+        margin-left: 7.5%;
+      }
+
+      .funnel-layer:nth-child(3) {
+        width: 70%;
+        margin-left: 15%;
+      }
+
+      .funnel-layer:nth-child(4) {
+        width: 55%;
+        margin-left: 22.5%;
+      }
+
+      .card-content h3 {
+        font-size: 24px;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+      }
+
+      .card-content > p {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+
+      .features-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .feature-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .feature-icon.pink {
+        background: #ffe6f0;
+      }
+
+      .feature-icon.orange {
+        background: #fff4e6;
+      }
+
+      .icon-check {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .pink .icon-check {
+        background: #ff6b9d;
+      }
+
+      .orange .icon-check {
+        background: #ff9800;
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          gap: 24px;
+        }
+
+        .header-content h1 {
+          font-size: 32px;
+        }
+
+        .service-card {
+          min-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="services-section">
+      <div class="header">
+        <div class="header-content">
+          <h1>Next-level business services</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur neque blandit sit iaculis
+            rhoncus in ac volutpat a tortor nulla donec et dui at posuere.
+          </p>
+        </div>
+        <div class="nav-arrows">
+          <button class="nav-arrow" id="prevBtn">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button class="nav-arrow" id="nextBtn">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="cards-container">
+        <div class="cards-wrapper" id="cardsWrapper">
+          <!-- Social Media Advertising Card -->
+          <div class="service-card">
+            <div class="card-visual social-media-visual">
+              <div class="phone-mockup">
+                <div class="phone-header">
+                  <div class="avatar"></div>
+                  <span class="username">@digigrowthmtk</span>
+                </div>
+                <div class="phone-content"></div>
+                <div class="dots">
+                  <div class="dot active"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Social media advertising</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
+                nam in morbi augue laoreet.
+              </p>
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>PPC / SEM</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Display Advertising</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Facebook & Google Advertising</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEO Optimization Card -->
+          <div class="service-card">
+            <div class="card-visual seo-visual">
+              <div class="search-box">
+                <span class="search-text">Keyword</span>
+                <svg
+                  class="search-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="M21 21l-4.35-4.35"></path>
+                </svg>
+              </div>
+              <div class="result-item">
+                <div
+                  class="result-bar"
+                  style="
+                    background: linear-gradient(
+                      90deg,
+                      #ffb366 0%,
+                      #ffd699 100%
+                    );
+                    width: 80%;
+                  "
+                ></div>
+                <span class="result-value">+4.01</span>
+              </div>
+              <div class="result-item">
+                <div
+                  class="result-bar"
+                  style="background: #e0e0e0; width: 60%"
+                ></div>
+                <span class="result-value">+2.81</span>
+              </div>
+              <div class="result-item">
+                <div
+                  class="result-bar"
+                  style="background: #e0e0e0; width: 50%"
+                ></div>
+                <span class="result-value">+1.4%</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>SEO optimization</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
+                nam in morbi augue laoreet.
+              </p>
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>SEO Audits</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>SEO Strategy & Coaching</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Page Speed Optimization</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Advanced Analytics Card -->
+          <div class="service-card">
+            <div class="card-visual analytics-visual">
+              <div class="chart-header">
+                <span class="chart-title">Monthly revenue</span>
+                <span class="chart-change">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="currentColor"
+                  >
+                    <circle cx="6" cy="6" r="6" />
+                  </svg>
+                  +4.6%
+                </span>
+              </div>
+              <div class="bars-container">
+                <div class="bar" style="height: 50%"></div>
+                <div class="bar" style="height: 62%"></div>
+                <div class="bar" style="height: 58%"></div>
+                <div class="bar highlight" style="height: 85%"></div>
+                <div class="bar" style="height: 68%"></div>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Advanced analytics</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
+                nam in morbi augue laoreet.
+              </p>
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Goals & Targets Setup</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>User Analytics</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon pink">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Heat Map Analytics</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Funnel Optimization Card -->
+          <div class="service-card">
+            <div class="card-visual funnel-visual">
+              <div class="funnel-chart">
+                <div class="funnel-layer"></div>
+                <div class="funnel-layer"></div>
+                <div class="funnel-layer"></div>
+                <div class="funnel-layer"></div>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Funnel optimization</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
+                nam in morbi augue laoreet.
+              </p>
+              <div class="features-list">
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>UX Analysis</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>Funnel Audit</span>
+                </div>
+                <div class="feature-item">
+                  <div class="feature-icon orange">
+                    <div class="icon-check"></div>
+                  </div>
+                  <span>CR Optimization</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const wrapper = document.getElementById("cardsWrapper");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      const cardWidth = 364; // 340px + 24px gap
+      let currentIndex = 0;
+      const originalCards = Array.from(
+        document.querySelectorAll(".service-card")
+      );
+      const totalCards = originalCards.length;
+
+      // Clone cards for infinite loop
+      function setupInfiniteLoop() {
+        // Clear wrapper
+        wrapper.innerHTML = "";
+
+        // Add cards before (for backward scrolling)
+        originalCards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          wrapper.appendChild(clone);
+        });
+
+        // Add original cards
+        originalCards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          wrapper.appendChild(clone);
+        });
+
+        // Add cards after (for forward scrolling)
+        originalCards.forEach((card) => {
+          const clone = card.cloneNode(true);
+          wrapper.appendChild(clone);
+        });
+
+        // Start at the middle set
+        currentIndex = totalCards;
+        wrapper.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      }
+
+      function scrollToIndex(index, smooth = true) {
+        if (smooth) {
+          wrapper.style.transition =
+            "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+        } else {
+          wrapper.style.transition = "none";
+        }
+        wrapper.style.transform = `translateX(-${index * cardWidth}px)`;
+      }
+
+      function handleTransitionEnd() {
+        // Reset position if we've scrolled to cloned cards
+        if (currentIndex >= totalCards * 2) {
+          currentIndex = totalCards;
+          scrollToIndex(currentIndex, false);
+        } else if (currentIndex < totalCards) {
+          currentIndex = totalCards * 2 - 1;
+          scrollToIndex(currentIndex, false);
+        }
+      }
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex++;
+        scrollToIndex(currentIndex, true);
+      });
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex--;
+        scrollToIndex(currentIndex, true);
+      });
+
+      wrapper.addEventListener("transitionend", handleTransitionEnd);
+
+      // Initialize
+      setupInfiniteLoop();
+
+      window.addEventListener("resize", () => {
+        setupInfiniteLoop();
+      });
+    </script>
+  </body>
+</html>

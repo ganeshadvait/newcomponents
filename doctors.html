@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Vets</title>
+    <style>
+   
+
+      .vets-section {
+        max-width: 1280px;
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .vets-title {
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 40px;
+        color: #111;
+      }
+
+      .vets-grid {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+      }
+
+      .vet-card {
+        position: relative;
+        width: 320px;
+        height: 420px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .vet-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .vet-overlay {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .vet-info {
+        text-align: left;
+      }
+
+      .vet-name {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .vet-role {
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+      }
+
+      .vet-icon {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #000;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        background: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .vet-icon:hover {
+        background: #000;
+        color: #fff;
+      }
+
+      /* Background colors per card */
+      .vet-bg-blue {
+        background: #87cefa;
+      }
+      .vet-bg-purple {
+        background: #dcb3f8;
+      }
+      .vet-bg-green {
+        background: #c7f5a8;
+      }
+
+      /* Custom text colors */
+      .vet-pink {
+        color: #f060c8;
+      }
+
+      /* Staggered layout */
+      .vet-left {
+        align-self: flex-start;
+        margin-top: -20px;
+      }
+
+      .vet-center {
+        align-self: center;
+      }
+
+      .vet-right {
+        align-self: flex-end;
+        margin-bottom: -20px;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .vets-grid {
+          flex-direction: column;
+          align-items: center;
+        }
+        .vet-left,
+        .vet-center,
+        .vet-right {
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="vets-section">
+      <h2 class="vets-title">Our vets</h2>
+      <div class="vets-grid">
+        <!-- Vet 1 -->
+        <div class="vet-card vet-bg-blue vet-left">
+          <img src="https://i.ibb.co/1fVZDLv/vet1.jpg" alt="John Carter" />
+          <div class="vet-overlay">
+            <div class="vet-info">
+              <p class="vet-name">John Carter</p>
+              <p class="vet-role">Veterinarian</p>
+            </div>
+            <div class="vet-icon">↗</div>
+          </div>
+        </div>
+
+        <!-- Vet 2 -->
+        <div class="vet-card vet-bg-purple vet-center">
+          <img src="https://i.ibb.co/8jzFGn2/vet2.jpg" alt="Lilly Woods" />
+          <div class="vet-overlay">
+            <div class="vet-info">
+              <p class="vet-name">Lilly Woods</p>
+              <p class="vet-role">Veterinarian</p>
+            </div>
+            <div class="vet-icon">↗</div>
+          </div>
+        </div>
+
+        <!-- Vet 3 -->
+        <div class="vet-card vet-bg-green vet-right">
+          <img src="https://i.ibb.co/NYqM1nC/vet3.jpg" alt="Billy Moore" />
+          <div class="vet-overlay">
+            <div class="vet-info">
+              <p class="vet-name vet-pink">Billy Moore</p>
+              <p class="vet-role">Veterinarian</p>
+            </div>
+            <div class="vet-icon">↗</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

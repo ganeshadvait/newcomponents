@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Accordion</title>
+    <style>
+      .custom-faq * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .custom-faq {
+        font-family: "Georgia", serif;
+        background-color: #fafaf9;
+        padding: 60px 20px;
+      }
+
+      .custom-faq-container {
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .custom-faq-badge {
+        display: inline-block;
+        background-color: #f5f5f4;
+        color: #57534e;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 6px;
+        margin-bottom: 24px;
+        letter-spacing: 0.3px;
+      }
+
+      .custom-faq-title {
+        font-size: 56px;
+        font-weight: 400;
+        color: #0c0a09;
+        line-height: 1.1;
+        margin-bottom: 48px;
+        letter-spacing: -0.02em;
+      }
+
+      .custom-accordion-item {
+        background-color: #ffffff;
+        border-radius: 12px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .custom-accordion-item:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .custom-accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 28px 32px;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.2s ease;
+      }
+
+      .custom-accordion-header:hover {
+        background-color: #fafaf9;
+      }
+
+      .custom-accordion-question {
+        font-size: 20px;
+        font-weight: 400;
+        color: #0c0a09;
+        letter-spacing: -0.01em;
+        flex: 1;
+        margin-right: 20px;
+      }
+
+      .custom-accordion-icon {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+        background: #0595c4;
+        border-radius: 10px;
+      }
+
+      .custom-accordion-icon svg {
+        width: 20px;
+        height: 20px;
+        stroke: #ffffff;
+        stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+
+      .custom-accordion-item.active .custom-accordion-icon svg {
+        transform: rotate(45deg);
+      }
+
+      .custom-accordion-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s ease-in-out;
+        overflow: hidden;
+        height: 0;
+      }
+
+      .custom-accordion-content-inner {
+        min-height: 0;
+        padding: 0 32px;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #57534e;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease-in-out 0.05s,
+          transform 0.3s ease-in-out 0.05s;
+      }
+
+      .custom-accordion-item.active .custom-accordion-content {
+        grid-template-rows: 1fr;
+        padding-bottom: 28px;
+        height: auto;
+      }
+
+      .custom-accordion-item.active .custom-accordion-content-inner {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .custom-faq-title {
+          font-size: 40px;
+        }
+
+        .custom-accordion-header {
+          padding: 24px 24px;
+        }
+
+        .custom-accordion-question {
+          font-size: 18px;
+        }
+
+        .custom-accordion-content-inner {
+          padding: 24px;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="custom-faq">
+      <div class="custom-faq-container">
+        <div class="custom-faq-badge">FAQs</div>
+        <h1 class="custom-faq-title">Frequently Asked Questions</h1>
+
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+        <div class="custom-accordion">
+          <div class="custom-accordion-item">
+            <div class="custom-accordion-header">
+              <div class="custom-accordion-question">
+                How long has your company been established?
+              </div>
+              <div class="custom-accordion-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="custom-accordion-content">
+              <div class="custom-accordion-content-inner">
+                Our company was established in 2015, bringing over 8 years of
+                expertise and dedication to providing exceptional care services.
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat more accordion items the same way... -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const accordionHeaders = document.querySelectorAll(
+        ".custom-accordion-header"
+      );
+
+      accordionHeaders.forEach((header) => {
+        header.addEventListener("click", function () {
+          const accordionItem = this.parentElement;
+
+          accordionItem.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
+</html>

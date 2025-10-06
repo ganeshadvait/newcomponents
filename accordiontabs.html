@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Services Accordion</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #052e23;
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+      .gradient-card {
+        background: linear-gradient(135deg, #0f5132 0%, #11644b 100%);
+      }
+      .accordion-item + .accordion-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .accordion-item.active .accordion-content {
+        max-height: 200px;
+      }
+      .accordion-icon {
+        transition: transform 0.3s ease;
+      }
+      .accordion-item.active .accordion-icon {
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col items-center justify-center p-8">
+    <!-- Header -->
+    <section class="text-center mb-12 max-w-3xl">
+      <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+        Our services are designed<br />
+        for businesses <span class="text-lime-300">of all sizes</span>
+      </h1>
+      <p class="text-gray-300 text-lg leading-relaxed">
+        Lorem ipsum dolor sit amet consectetur massa arcu enim vestibulum nisl
+        massa dolor feugiat mrisus sed lacus nec aliquam nec a elementum est
+        donec morbi praesent lacus viverra quis.
+      </p>
+    </section>
+
+    <!-- Main Card -->
+    <section
+      class="gradient-card rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 w-full max-w-6xl"
+    >
+      <!-- Illustration (left) -->
+      <div class="flex-1 flex justify-center">
+        <img
+          id="illustration"
+          src="https://cdn-icons-png.flaticon.com/512/5234/5234783.png"
+          alt="Illustration"
+          class="rounded-xl shadow-lg w-72 h-72 object-contain transition-all duration-500"
+        />
+      </div>
+
+      <!-- Accordion (right) -->
+      <div class="flex-1 w-full">
+        <div
+          class="accordion-item py-4 cursor-pointer"
+          data-img="https://cdn-icons-png.flaticon.com/512/5234/5234783.png"
+        >
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold">For small businesses</h3>
+            <span class="accordion-icon text-3xl font-light">+</span>
+          </div>
+          <div class="accordion-content text-gray-200 mt-3">
+            <p>
+              We provide tailored strategies and growth solutions that help
+              small businesses scale sustainably.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="accordion-item py-4 cursor-pointer"
+          data-img="https://cdn-icons-png.flaticon.com/512/5234/5234791.png"
+        >
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold">For startups</h3>
+            <span class="accordion-icon text-3xl font-light">+</span>
+          </div>
+          <div class="accordion-content text-gray-200 mt-3">
+            <p>
+              From funding guidance to marketing strategy, our startup packages
+              give your idea a strong launchpad.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="accordion-item py-4 cursor-pointer"
+          data-img="https://cdn-icons-png.flaticon.com/512/5234/5234812.png"
+        >
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold">For enterprises</h3>
+            <span class="accordion-icon text-3xl font-light">+</span>
+          </div>
+          <div class="accordion-content text-gray-200 mt-3">
+            <p>
+              We assist large-scale enterprises in innovation, digital
+              transformation, and maintaining operational agility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <div class="flex gap-6 mt-10">
+      <button
+        class="bg-white text-gray-900 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition"
+      >
+        Get started
+      </button>
+      <button
+        class="border border-gray-400 text-white font-semibold px-6 py-3 rounded-full hover:bg-white hover:text-gray-900 transition"
+      >
+        Learn more
+      </button>
+    </div>
+
+    <script>
+      const items = document.querySelectorAll(".accordion-item");
+      const illustration = document.getElementById("illustration");
+
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
+          const isActive = item.classList.contains("active");
+          items.forEach((i) => i.classList.remove("active"));
+          if (!isActive) {
+            item.classList.add("active");
+            const imgUrl = item.getAttribute("data-img");
+            illustration.style.opacity = "0";
+            setTimeout(() => {
+              illustration.src = imgUrl;
+              illustration.style.opacity = "1";
+            }, 200);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
