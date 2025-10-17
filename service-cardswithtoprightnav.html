@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Business Services</title>
     <style>
+      /* General Reset */
       * {
         margin: 0;
         padding: 0;
@@ -18,19 +19,20 @@
         padding: 60px 20px;
       }
 
-      .services-section {
+      /* Services Section */
+      .bizsvc_services-section {
         max-width: 1400px;
         margin: 0 auto;
       }
 
-      .header {
+      .bizsvc_header {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 60px;
       }
 
-      .header-content h1 {
+      .bizsvc_header-content h1 {
         font-size: 48px;
         font-weight: 400;
         color: #1a1a1a;
@@ -38,19 +40,19 @@
         letter-spacing: -0.5px;
       }
 
-      .header-content p {
+      .bizsvc_header-content p {
         font-size: 16px;
         color: #666;
         line-height: 1.6;
         max-width: 600px;
       }
 
-      .nav-arrows {
+      .bizsvc_nav-arrows {
         display: flex;
         gap: 12px;
       }
 
-      .nav-arrow {
+      .bizsvc_nav-arrow {
         width: 48px;
         height: 48px;
         border: 1px solid #ddd;
@@ -63,34 +65,34 @@
         transition: all 0.3s ease;
       }
 
-      .nav-arrow:hover {
+      .bizsvc_nav-arrow:hover {
         background: #f5f5f5;
         border-color: #ccc;
       }
 
-      .nav-arrow:disabled {
+      .bizsvc_nav-arrow:disabled {
         opacity: 0.3;
         cursor: not-allowed;
         display: none;
       }
 
-      .nav-arrow svg {
+      .bizsvc_nav-arrow svg {
         width: 20px;
         height: 20px;
       }
 
-      .cards-container {
+      .bizsvc_cards-container {
         overflow: hidden;
         position: relative;
       }
 
-      .cards-wrapper {
+      .bizsvc_cards-wrapper {
         display: flex;
         gap: 24px;
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .service-card {
+      .bizsvc_service-card {
         min-width: 340px;
         background: white;
         border-radius: 16px;
@@ -98,7 +100,7 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       }
 
-      .card-visual {
+      .bizsvc_card-visual {
         width: 100%;
         height: 220px;
         border-radius: 12px;
@@ -107,7 +109,7 @@
         overflow: hidden;
       }
 
-      .social-media-visual {
+      .bizsvc_social-media-visual {
         background: linear-gradient(
           135deg,
           #ffd6d6 0%,
@@ -119,7 +121,7 @@
         justify-content: center;
       }
 
-      .phone-mockup {
+      .bizsvc_phone-mockup {
         width: 180px;
         height: 200px;
         background: white;
@@ -129,33 +131,33 @@
         position: relative;
       }
 
-      .phone-header {
+      .bizsvc_phone-header {
         display: flex;
         align-items: center;
         gap: 8px;
         margin-bottom: 12px;
       }
 
-      .avatar {
+      .bizsvc_avatar {
         width: 28px;
         height: 28px;
         border-radius: 50%;
         background: #ffcccb;
       }
 
-      .username {
+      .bizsvc_username {
         font-size: 11px;
         font-weight: 600;
       }
 
-      .phone-content {
+      .bizsvc_phone-content {
         width: 100%;
         height: 140px;
         background: linear-gradient(180deg, #ffb3ba 0%, #ffe0e5 100%);
         border-radius: 12px;
       }
 
-      .dots {
+      .bizsvc_dots {
         position: absolute;
         bottom: 16px;
         left: 50%;
@@ -164,18 +166,18 @@
         gap: 6px;
       }
 
-      .dot {
+      .bizsvc_dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
         background: #ddd;
       }
 
-      .dot.active {
+      .bizsvc_dot.active {
         background: #666;
       }
 
-      .seo-visual {
+      .bizsvc_seo-visual {
         background: linear-gradient(135deg, #fff9e6 0%, #fffdf5 100%);
         padding: 20px;
         display: flex;
@@ -183,7 +185,7 @@
         gap: 16px;
       }
 
-      .search-box {
+      .bizsvc_search-box {
         background: white;
         border-radius: 8px;
         padding: 12px;
@@ -193,18 +195,18 @@
         justify-content: space-between;
       }
 
-      .search-text {
+      .bizsvc_search-text {
         font-size: 12px;
         color: #999;
       }
 
-      .search-icon {
+      .bizsvc_search-icon {
         width: 16px;
         height: 16px;
         color: #999;
       }
 
-      .result-item {
+      .bizsvc_result-item {
         background: white;
         border-radius: 6px;
         padding: 12px;
@@ -214,20 +216,20 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
       }
 
-      .result-bar {
+      .bizsvc_result-bar {
         height: 8px;
         border-radius: 4px;
         flex: 1;
         max-width: 120px;
       }
 
-      .result-value {
+      .bizsvc_result-value {
         font-size: 10px;
         color: #999;
         margin-left: 12px;
       }
 
-      .analytics-visual {
+      .bizsvc_analytics-visual {
         background: linear-gradient(135deg, #ffe6f0 0%, #fff5f9 100%);
         padding: 20px;
         display: flex;
@@ -235,19 +237,19 @@
         gap: 12px;
       }
 
-      .chart-header {
+      .bizsvc_chart-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
-      .chart-title {
+      .bizsvc_chart-title {
         font-size: 11px;
         color: #666;
         font-weight: 600;
       }
 
-      .chart-change {
+      .bizsvc_chart-change {
         font-size: 10px;
         color: #ff6b9d;
         display: flex;
@@ -255,7 +257,7 @@
         gap: 4px;
       }
 
-      .bars-container {
+      .bizsvc_bars-container {
         display: flex;
         align-items: flex-end;
         gap: 8px;
@@ -263,7 +265,7 @@
         margin-top: 8px;
       }
 
-      .bar {
+      .bizsvc_bar {
         flex: 1;
         background: linear-gradient(180deg, #ff9db8 0%, #ffb3ca 100%);
         border-radius: 6px 6px 0 0;
@@ -271,12 +273,12 @@
         opacity: 0.7;
       }
 
-      .bar.highlight {
+      .bizsvc_bar.highlight {
         opacity: 1;
         background: linear-gradient(180deg, #ff6b9d 0%, #ff8ab3 100%);
       }
 
-      .funnel-visual {
+      .bizsvc_funnel-visual {
         background: linear-gradient(135deg, #fff4e6 0%, #fffbf5 100%);
         padding: 20px;
         display: flex;
@@ -284,13 +286,13 @@
         justify-content: center;
       }
 
-      .funnel-chart {
+      .bizsvc_funnel-chart {
         width: 100%;
         height: 140px;
         position: relative;
       }
 
-      .funnel-layer {
+      .bizsvc_funnel-layer {
         width: 100%;
         height: 28px;
         background: linear-gradient(90deg, #ffb366 0%, #ffd699 100%);
@@ -304,42 +306,42 @@
         box-shadow: 0 2px 8px rgba(255, 140, 0, 0.15);
       }
 
-      .funnel-layer:nth-child(2) {
+      .bizsvc_funnel-layer:nth-child(2) {
         width: 85%;
         margin-left: 7.5%;
       }
 
-      .funnel-layer:nth-child(3) {
+      .bizsvc_funnel-layer:nth-child(3) {
         width: 70%;
         margin-left: 15%;
       }
 
-      .funnel-layer:nth-child(4) {
+      .bizsvc_funnel-layer:nth-child(4) {
         width: 55%;
         margin-left: 22.5%;
       }
 
-      .card-content h3 {
+      .bizsvc_card-content h3 {
         font-size: 24px;
         font-weight: 500;
         color: #1a1a1a;
         margin-bottom: 12px;
       }
 
-      .card-content > p {
+      .bizsvc_card-content > p {
         font-size: 14px;
         color: #666;
         line-height: 1.6;
         margin-bottom: 24px;
       }
 
-      .features-list {
+      .bizsvc_features-list {
         display: flex;
         flex-direction: column;
         gap: 12px;
       }
 
-      .feature-item {
+      .bizsvc_feature-item {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -347,7 +349,7 @@
         color: #333;
       }
 
-      .feature-icon {
+      .bizsvc_feature-icon {
         width: 20px;
         height: 20px;
         border-radius: 50%;
@@ -357,56 +359,56 @@
         flex-shrink: 0;
       }
 
-      .feature-icon.pink {
+      .bizsvc_feature-icon.pink {
         background: #ffe6f0;
       }
 
-      .feature-icon.orange {
+      .bizsvc_feature-icon.orange {
         background: #fff4e6;
       }
 
-      .icon-check {
+      .bizsvc_icon-check {
         width: 10px;
         height: 10px;
         border-radius: 50%;
       }
 
-      .pink .icon-check {
+      .bizsvc_pink .bizsvc_icon-check {
         background: #ff6b9d;
       }
 
-      .orange .icon-check {
+      .bizsvc_orange .bizsvc_icon-check {
         background: #ff9800;
       }
 
       @media (max-width: 768px) {
-        .header {
+        .bizsvc_header {
           flex-direction: column;
           gap: 24px;
         }
 
-        .header-content h1 {
+        .bizsvc_header-content h1 {
           font-size: 32px;
         }
 
-        .service-card {
+        .bizsvc_service-card {
           min-width: 300px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="services-section">
-      <div class="header">
-        <div class="header-content">
+    <div class="bizsvc_services-section">
+      <div class="bizsvc_header">
+        <div class="bizsvc_header-content">
           <h1>Next-level business services</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur neque blandit sit iaculis
             rhoncus in ac volutpat a tortor nulla donec et dui at posuere.
           </p>
         </div>
-        <div class="nav-arrows">
-          <button class="nav-arrow" id="prevBtn">
+        <div class="bizsvc_nav-arrows">
+          <button class="bizsvc_nav-arrow" id="bizsvc_prevBtn">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -416,7 +418,7 @@
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <button class="nav-arrow" id="nextBtn">
+          <button class="bizsvc_nav-arrow" id="bizsvc_nextBtn">
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -429,46 +431,46 @@
         </div>
       </div>
 
-      <div class="cards-container">
-        <div class="cards-wrapper" id="cardsWrapper">
-          <!-- Social Media Advertising Card -->
-          <div class="service-card">
-            <div class="card-visual social-media-visual">
-              <div class="phone-mockup">
-                <div class="phone-header">
-                  <div class="avatar"></div>
-                  <span class="username">@digigrowthmtk</span>
+      <div class="bizsvc_cards-container">
+        <div class="bizsvc_cards-wrapper" id="bizsvc_cardsWrapper">
+          <!-- Social Media Card -->
+          <div class="bizsvc_service-card">
+            <div class="bizsvc_card-visual bizsvc_social-media-visual">
+              <div class="bizsvc_phone-mockup">
+                <div class="bizsvc_phone-header">
+                  <div class="bizsvc_avatar"></div>
+                  <span class="bizsvc_username">@digigrowthmtk</span>
                 </div>
-                <div class="phone-content"></div>
-                <div class="dots">
-                  <div class="dot active"></div>
-                  <div class="dot"></div>
-                  <div class="dot"></div>
+                <div class="bizsvc_phone-content"></div>
+                <div class="bizsvc_dots">
+                  <div class="bizsvc_dot active"></div>
+                  <div class="bizsvc_dot"></div>
+                  <div class="bizsvc_dot"></div>
                 </div>
               </div>
             </div>
-            <div class="card-content">
+            <div class="bizsvc_card-content">
               <h3>Social media advertising</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur eras in fringilla integer
                 nam in morbi augue laoreet.
               </p>
-              <div class="features-list">
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
+              <div class="bizsvc_features-list">
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon pink">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
                   <span>PPC / SEM</span>
                 </div>
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon pink">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
                   <span>Display Advertising</span>
                 </div>
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon pink">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
                   <span>Facebook & Google Advertising</span>
                 </div>
@@ -476,13 +478,13 @@
             </div>
           </div>
 
-          <!-- SEO Optimization Card -->
-          <div class="service-card">
-            <div class="card-visual seo-visual">
-              <div class="search-box">
-                <span class="search-text">Keyword</span>
+          <!-- SEO Card -->
+          <div class="bizsvc_service-card">
+            <div class="bizsvc_card-visual bizsvc_seo-visual">
+              <div class="bizsvc_search-box">
+                <span class="bizsvc_search-text">Keyword</span>
                 <svg
-                  class="search-icon"
+                  class="bizsvc_search-icon"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -492,152 +494,110 @@
                   <path d="M21 21l-4.35-4.35"></path>
                 </svg>
               </div>
-              <div class="result-item">
+              <div class="bizsvc_result-item">
                 <div
-                  class="result-bar"
-                  style="
-                    background: linear-gradient(
-                      90deg,
-                      #ffb366 0%,
-                      #ffd699 100%
-                    );
-                    width: 80%;
-                  "
+                  class="bizsvc_result-bar"
+                  style="width: 80%; background: #ffb366"
                 ></div>
-                <span class="result-value">+4.01</span>
+                <span class="bizsvc_result-value">80</span>
               </div>
-              <div class="result-item">
+              <div class="bizsvc_result-item">
                 <div
-                  class="result-bar"
-                  style="background: #e0e0e0; width: 60%"
+                  class="bizsvc_result-bar"
+                  style="width: 60%; background: #ff9800"
                 ></div>
-                <span class="result-value">+2.81</span>
-              </div>
-              <div class="result-item">
-                <div
-                  class="result-bar"
-                  style="background: #e0e0e0; width: 50%"
-                ></div>
-                <span class="result-value">+1.4%</span>
+                <span class="bizsvc_result-value">60</span>
               </div>
             </div>
-            <div class="card-content">
-              <h3>SEO optimization</h3>
+            <div class="bizsvc_card-content">
+              <h3>SEO Optimization</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
-                nam in morbi augue laoreet.
+                Optimize your website content and structure to rank higher on
+                search engines and attract more traffic.
               </p>
-              <div class="features-list">
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
+              <div class="bizsvc_features-list">
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon orange">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>SEO Audits</span>
+                  <span>On-page SEO</span>
                 </div>
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon orange">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>SEO Strategy & Coaching</span>
-                </div>
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
-                  </div>
-                  <span>Page Speed Optimization</span>
+                  <span>Keyword Research</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Advanced Analytics Card -->
-          <div class="service-card">
-            <div class="card-visual analytics-visual">
-              <div class="chart-header">
-                <span class="chart-title">Monthly revenue</span>
-                <span class="chart-change">
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="currentColor"
-                  >
-                    <circle cx="6" cy="6" r="6" />
-                  </svg>
-                  +4.6%
-                </span>
+          <!-- Analytics Card -->
+          <div class="bizsvc_service-card">
+            <div class="bizsvc_card-visual bizsvc_analytics-visual">
+              <div class="bizsvc_chart-header">
+                <span class="bizsvc_chart-title">Website Analytics</span>
+                <span class="bizsvc_chart-change">+12%</span>
               </div>
-              <div class="bars-container">
-                <div class="bar" style="height: 50%"></div>
-                <div class="bar" style="height: 62%"></div>
-                <div class="bar" style="height: 58%"></div>
-                <div class="bar highlight" style="height: 85%"></div>
-                <div class="bar" style="height: 68%"></div>
+              <div class="bizsvc_bars-container">
+                <div class="bizsvc_bar" style="height: 40%"></div>
+                <div class="bizsvc_bar highlight" style="height: 80%"></div>
+                <div class="bizsvc_bar" style="height: 60%"></div>
+                <div class="bizsvc_bar" style="height: 50%"></div>
+                <div class="bizsvc_bar" style="height: 70%"></div>
               </div>
             </div>
-            <div class="card-content">
-              <h3>Advanced analytics</h3>
+            <div class="bizsvc_card-content">
+              <h3>Analytics & Reporting</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
-                nam in morbi augue laoreet.
+                Track your campaigns and business performance to make
+                data-driven decisions.
               </p>
-              <div class="features-list">
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
+              <div class="bizsvc_features-list">
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon pink">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>Goals & Targets Setup</span>
+                  <span>Traffic Reports</span>
                 </div>
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon pink">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>User Analytics</span>
-                </div>
-                <div class="feature-item">
-                  <div class="feature-icon pink">
-                    <div class="icon-check"></div>
-                  </div>
-                  <span>Heat Map Analytics</span>
+                  <span>Conversion Tracking</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Funnel Optimization Card -->
-          <div class="service-card">
-            <div class="card-visual funnel-visual">
-              <div class="funnel-chart">
-                <div class="funnel-layer"></div>
-                <div class="funnel-layer"></div>
-                <div class="funnel-layer"></div>
-                <div class="funnel-layer"></div>
+          <!-- Funnel Card -->
+          <div class="bizsvc_service-card">
+            <div class="bizsvc_card-visual bizsvc_funnel-visual">
+              <div class="bizsvc_funnel-chart">
+                <div class="bizsvc_funnel-layer">Leads</div>
+                <div class="bizsvc_funnel-layer">Prospects</div>
+                <div class="bizsvc_funnel-layer">Opportunities</div>
+                <div class="bizsvc_funnel-layer">Sales</div>
               </div>
             </div>
-            <div class="card-content">
-              <h3>Funnel optimization</h3>
+            <div class="bizsvc_card-content">
+              <h3>Sales Funnel Optimization</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur eras in fringilla integer
-                nam in morbi augue laoreet.
+                Streamline your sales process to maximize conversions and
+                revenue growth.
               </p>
-              <div class="features-list">
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
+              <div class="bizsvc_features-list">
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon orange">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>UX Analysis</span>
+                  <span>Lead Management</span>
                 </div>
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
+                <div class="bizsvc_feature-item">
+                  <div class="bizsvc_feature-icon orange">
+                    <div class="bizsvc_icon-check"></div>
                   </div>
-                  <span>Funnel Audit</span>
-                </div>
-                <div class="feature-item">
-                  <div class="feature-icon orange">
-                    <div class="icon-check"></div>
-                  </div>
-                  <span>CR Optimization</span>
+                  <span>Conversion Optimization</span>
                 </div>
               </div>
             </div>
@@ -647,83 +607,91 @@
     </div>
 
     <script>
-      const wrapper = document.getElementById("cardsWrapper");
-      const prevBtn = document.getElementById("prevBtn");
-      const nextBtn = document.getElementById("nextBtn");
+      const bizsvcWrapper = document.getElementById("bizsvc_cardsWrapper");
+      const bizsvcPrevBtn = document.getElementById("bizsvc_prevBtn");
+      const bizsvcNextBtn = document.getElementById("bizsvc_nextBtn");
 
-      const cardWidth = 364; // 340px + 24px gap
-      let currentIndex = 0;
-      const originalCards = Array.from(
-        document.querySelectorAll(".service-card")
+      let bizsvcCurrentIndex = 0;
+      const bizsvcOriginalCards = Array.from(
+        document.querySelectorAll(".bizsvc_service-card")
       );
-      const totalCards = originalCards.length;
+      const bizsvcTotalCards = bizsvcOriginalCards.length;
 
-      // Clone cards for infinite loop
-      function setupInfiniteLoop() {
-        // Clear wrapper
-        wrapper.innerHTML = "";
-
-        // Add cards before (for backward scrolling)
-        originalCards.forEach((card) => {
-          const clone = card.cloneNode(true);
-          wrapper.appendChild(clone);
-        });
-
-        // Add original cards
-        originalCards.forEach((card) => {
-          const clone = card.cloneNode(true);
-          wrapper.appendChild(clone);
-        });
-
-        // Add cards after (for forward scrolling)
-        originalCards.forEach((card) => {
-          const clone = card.cloneNode(true);
-          wrapper.appendChild(clone);
-        });
-
-        // Start at the middle set
-        currentIndex = totalCards;
-        wrapper.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+      // Function to get dynamic card width including gap
+      function bizsvcGetCardWidth() {
+        const card = document.querySelector(".bizsvc_service-card");
+        const wrapperStyle = window.getComputedStyle(bizsvcWrapper);
+        const gap = parseInt(wrapperStyle.gap) || 24;
+        return card.offsetWidth + gap;
       }
 
-      function scrollToIndex(index, smooth = true) {
-        if (smooth) {
-          wrapper.style.transition =
-            "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
-        } else {
-          wrapper.style.transition = "none";
+      // Setup infinite loop
+      function bizsvcSetupInfiniteLoop() {
+        const cardWidth = bizsvcGetCardWidth();
+
+        // Remember visible card for responsive resize
+        const visibleIndex = bizsvcCurrentIndex % bizsvcTotalCards;
+
+        // Clear wrapper and add clones
+        bizsvcWrapper.innerHTML = "";
+        bizsvcOriginalCards.forEach((card) =>
+          bizsvcWrapper.appendChild(card.cloneNode(true))
+        );
+        bizsvcOriginalCards.forEach((card) =>
+          bizsvcWrapper.appendChild(card.cloneNode(true))
+        );
+        bizsvcOriginalCards.forEach((card) =>
+          bizsvcWrapper.appendChild(card.cloneNode(true))
+        );
+
+        // Set current index in middle set
+        bizsvcCurrentIndex = bizsvcTotalCards + visibleIndex;
+        bizsvcScrollToIndex(bizsvcCurrentIndex, false);
+      }
+
+      // Scroll to specific index
+      function bizsvcScrollToIndex(index, smooth = true) {
+        bizsvcWrapper.style.transition = smooth
+          ? "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)"
+          : "none";
+
+        const cardWidth = bizsvcGetCardWidth();
+        bizsvcWrapper.style.transform = `translateX(-${index * cardWidth}px)`;
+      }
+
+      // Handle infinite loop reset
+      function bizsvcHandleTransitionEnd() {
+        if (bizsvcCurrentIndex >= bizsvcTotalCards * 2) {
+          bizsvcCurrentIndex = bizsvcTotalCards;
+          bizsvcScrollToIndex(bizsvcCurrentIndex, false);
+        } else if (bizsvcCurrentIndex < bizsvcTotalCards) {
+          bizsvcCurrentIndex = bizsvcTotalCards * 2 - 1;
+          bizsvcScrollToIndex(bizsvcCurrentIndex, false);
         }
-        wrapper.style.transform = `translateX(-${index * cardWidth}px)`;
       }
 
-      function handleTransitionEnd() {
-        // Reset position if we've scrolled to cloned cards
-        if (currentIndex >= totalCards * 2) {
-          currentIndex = totalCards;
-          scrollToIndex(currentIndex, false);
-        } else if (currentIndex < totalCards) {
-          currentIndex = totalCards * 2 - 1;
-          scrollToIndex(currentIndex, false);
-        }
-      }
-
-      nextBtn.addEventListener("click", () => {
-        currentIndex++;
-        scrollToIndex(currentIndex, true);
+      // Next / Prev buttons
+      bizsvcNextBtn.addEventListener("click", () => {
+        bizsvcCurrentIndex++;
+        bizsvcScrollToIndex(bizsvcCurrentIndex, true);
       });
 
-      prevBtn.addEventListener("click", () => {
-        currentIndex--;
-        scrollToIndex(currentIndex, true);
+      bizsvcPrevBtn.addEventListener("click", () => {
+        bizsvcCurrentIndex--;
+        bizsvcScrollToIndex(bizsvcCurrentIndex, true);
       });
 
-      wrapper.addEventListener("transitionend", handleTransitionEnd);
+      bizsvcWrapper.addEventListener(
+        "transitionend",
+        bizsvcHandleTransitionEnd
+      );
 
       // Initialize
-      setupInfiniteLoop();
+      bizsvcSetupInfiniteLoop();
 
+      // Recalculate on window resize without losing current visible card
       window.addEventListener("resize", () => {
-        setupInfiniteLoop();
+        bizsvcSetupInfiniteLoop();
       });
     </script>
   </body>
