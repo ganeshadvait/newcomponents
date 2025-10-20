@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iOS Notification Permission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, sans-serif;
+        background: linear-gradient(135deg, #e5e5ea 0%, #f2f2f7 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .phone-container {
+        width: 100%;
+        /* height: 844px; */
+        background: linear-gradient(
+          180deg,
+          #e8e0ff 0%,
+          #ffe8f0 40%,
+          #fff5e8 100%
+        );
+        /* border-radius: 50px; */
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Status Bar */
+      /* .status-bar {
+        padding: 15px 30px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      } */
+
+      .time {
+        font-weight: 600;
+        font-size: 17px;
+        color: #000;
+      }
+      /* 
+      .dynamic-island {
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 126px;
+        height: 37px;
+        background: #000;
+        border-radius: 20px;
+      } */
+      /* 
+      .status-icons {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        font-size: 14px;
+      } */
+
+      /* Lock Screen with Glassmorphism */
+      .lock-screen {
+        position: relative;
+        margin: 30px 20px 0;
+      }
+
+      .lock-display {
+        /* background: rgba(255, 255, 255, 0.15); */
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        /* border: 1.5px solid rgba(255, 255, 255, 0.4); */
+        border-radius: 42px;
+        padding: 35px 20px;
+        text-align: center;
+        /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5); */
+        position: relative;
+        overflow: hidden;
+      }
+
+      .lock-display::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+      }
+
+      .lock-date {
+        font-size: 17px;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+        margin-bottom: 8px;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .lock-time {
+        font-size: 76px;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.98);
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        letter-spacing: -3px;
+        line-height: 1;
+      }
+
+      /* Notification Cards with Glassmorphism */
+      .notifications {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .notification-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12),
+          0 2px 8px rgba(0, 0, 0, 0.08);
+        animation: cardSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+      }
+
+      .notification-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.8),
+          transparent
+        );
+      }
+
+      @keyframes cardSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .notification-card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+
+      .notification-card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .notification-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        position: relative;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .avatar-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .app-badge {
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        width: 20px;
+        height: 20px;
+        background: #ff3b30;
+        border-radius: 5px;
+        border: 2.5px solid #fff;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .notification-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .notification-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3px;
+      }
+
+      .notification-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #000;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .notification-time {
+        font-size: 14px;
+        color: #8e8e93;
+        font-weight: 400;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .notification-text {
+        font-size: 14px;
+        color: #3c3c43;
+        line-height: 1.35;
+        opacity: 0.95;
+      }
+
+      /* Permission Section */
+      .permission-section {
+        margin-top: 40px;
+        padding: 0 20px;
+        text-align: center;
+      }
+
+      /* Scattered Memoji Avatars */
+      .avatars-container {
+        position: relative;
+        height: 200px;
+        margin-bottom: 30px;
+      }
+
+      .memoji-avatar {
+        position: absolute;
+        border-radius: 50%;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        animation: float 4s ease-in-out infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      /* Position each avatar scattered across the screen */
+      .memoji-avatar:nth-child(1) {
+        width: 68px;
+        height: 68px;
+        left: 15px;
+        top: 80px;
+        background: linear-gradient(135deg, #5dade2 0%, #3498db 100%);
+        animation-delay: 0s;
+      }
+
+      .memoji-avatar:nth-child(2) {
+        width: 62px;
+        height: 62px;
+        left: 95px;
+        top: 30px;
+        background: linear-gradient(135deg, #58d68d 0%, #2ecc71 100%);
+        animation-delay: 0.3s;
+      }
+
+      .memoji-avatar:nth-child(3) {
+        width: 58px;
+        height: 58px;
+        left: 160px;
+        top: 100px;
+        background: linear-gradient(135deg, #aaa69d 0%, #8b8680 100%);
+        animation-delay: 0.6s;
+      }
+
+      .memoji-avatar:nth-child(4) {
+        width: 90px;
+        height: 90px;
+        left: 145px;
+        top: 20px;
+        background: linear-gradient(135deg, #bb8fce 0%, #9b59b6 100%);
+        animation-delay: 0.9s;
+        z-index: 5;
+      }
+
+      .memoji-avatar:nth-child(5) {
+        width: 72px;
+        height: 72px;
+        left: 250px;
+        top: 45px;
+        background: linear-gradient(135deg, #f1948a 0%, #ec7063 100%);
+        animation-delay: 1.2s;
+      }
+
+      .memoji-avatar:nth-child(6) {
+        width: 66px;
+        height: 66px;
+        left: 230px;
+        top: 125px;
+        background: linear-gradient(135deg, #f9e79f 0%, #f4d03f 100%);
+        animation-delay: 1.5s;
+      }
+
+      .memoji-avatar:nth-child(7) {
+        width: 68px;
+        height: 68px;
+        left: 295px;
+        top: 85px;
+        background: linear-gradient(135deg, #f5b7b1 0%, #f1948a 100%);
+        animation-delay: 1.8s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) scale(1);
+        }
+        50% {
+          transform: translateY(-12px) scale(1.02);
+        }
+      }
+
+      /* Memoji Face Styles */
+      .memoji-face {
+        font-size: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .memoji-avatar:nth-child(4) .memoji-face {
+        font-size: 48px;
+      }
+
+      .permission-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1c1c1e;
+        margin-bottom: 10px;
+        line-height: 1.25;
+        letter-spacing: -0.5px;
+      }
+
+      .permission-subtitle {
+        font-size: 16px;
+        color: #8e8e93;
+        margin-bottom: 28px;
+        line-height: 1.4;
+        font-weight: 400;
+      }
+
+      .button-primary {
+        width: 100%;
+        background: #000;
+        color: #fff;
+        border: none;
+        border-radius: 13px;
+        padding: 17px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .button-primary:active {
+        transform: scale(0.98);
+        background: #1a1a1a;
+      }
+
+      .button-secondary {
+        width: 100%;
+        background: transparent;
+        color: #8e8e93;
+        border: none;
+        padding: 14px;
+        font-size: 17px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: color 0.2s;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .button-secondary:active {
+        color: #000;
+      }
+
+      /* Home Indicator */
+      .home-indicator {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 5px;
+        background: #000;
+        border-radius: 100px;
+        opacity: 0.3;
+      }
+
+      /* Realistic Avatar Images */
+      .avatar-lia {
+        background: linear-gradient(135deg, #ffe5e5 0%, #ffd5e5 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+
+      .avatar-thom {
+        background: linear-gradient(135deg, #e5f3ff 0%, #d5e8ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="phone-container">
+      <!-- Lock Screen with Glassmorphism -->
+      <div class="lock-screen">
+        <div class="lock-display">
+          <div class="lock-date">Monday, June 3</div>
+          <div class="lock-time">9:41</div>
+        </div>
+
+        <!-- Notification Cards -->
+        <div class="notifications">
+          <div class="notification-card">
+            <div class="notification-avatar avatar-lia">
+              👩🏻
+              <span class="app-badge">📷</span>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-name">Lia Marie</span>
+                <span class="notification-time">now</span>
+              </div>
+              <div class="notification-text">Added 23 photos to Outings.</div>
+            </div>
+          </div>
+
+          <div class="notification-card">
+            <div class="notification-avatar avatar-thom">
+              👨🏾
+              <span class="app-badge">📍</span>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-name">Thom Avril</span>
+                <span class="notification-time">2m</span>
+              </div>
+              <div class="notification-text">Is eating at Dome, Joondalup.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permission Section -->
+      <div class="permission-section">
+        <!-- Scattered Memoji Avatars -->
+        <div class="avatars-container">
+          <div class="memoji-avatar">
+            <div class="memoji-face">👧🏻</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👩🏻</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👨🏽</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👩🏻‍🦱</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👨🏻</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👧🏼</div>
+          </div>
+          <div class="memoji-avatar">
+            <div class="memoji-face">👨🏻‍🦰</div>
+          </div>
+        </div>
+
+        <h2 class="permission-title">
+          Don't miss out on what your<br />friends are up to
+        </h2>
+        <p class="permission-subtitle">Never miss those precious moments.</p>
+
+        <button class="button-primary">Turn on notifications</button>
+        <button class="button-secondary">Another time</button>
+      </div>
+
+      <!-- Home Indicator -->
+      <div class="home-indicator"></div>
+    </div>
+  </body>
+</html>

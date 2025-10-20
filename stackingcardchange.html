@@ -611,8 +611,8 @@
   </head>
   <body>
     <div class="app-container">
-      <!-- Home Screen -->
-      <div class="header" id="header">
+
+      <!-- <div class="header" id="header">
         <div class="wallet">
           <div class="avatar"></div>
           <span class="wallet-address">488.29 ETH</span>
@@ -626,85 +626,13 @@
           <div class="scan-icon">📷</div>
         </div>
         <h1 class="title">Explore the most🔥<br />popular artists&items</h1>
-      </div>
+      </div> -->
 
       <div class="cards-container" id="cardsContainer">
-        <div class="nft-card" onclick="openDetail()">
-          <span class="time-badge">28h 16m 15s</span>
-          <div class="card-image"></div>
-          <div class="card-info">
-            <div>
-              <div class="card-title">Overload</div>
-              <div class="card-author">
-                <div class="author-avatar"></div>
-                <span>Teddy</span>
-              </div>
-            </div>
-            <div class="card-price">
-              <div class="price-label">Current bid</div>
-              <div class="price-value">88.00 ETH</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="nft-card">
-          <span class="time-badge">15h 42m 08s</span>
-          <div
-            class="card-image"
-            style="
-              background: linear-gradient(
-                135deg,
-                #a8e6cf 0%,
-                #ffd3b6 50%,
-                #ffaaa5 100%
-              );
-            "
-          ></div>
-          <div class="card-info">
-            <div>
-              <div class="card-title">Dreamscape</div>
-              <div class="card-author">
-                <div class="author-avatar"></div>
-                <span>Luna</span>
-              </div>
-            </div>
-            <div class="card-price">
-              <div class="price-label">Current bid</div>
-              <div class="price-value">65.00 ETH</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="nft-card">
-          <span class="time-badge">22h 08m 31s</span>
-          <div
-            class="card-image"
-            style="
-              background: linear-gradient(
-                135deg,
-                #667eea 0%,
-                #764ba2 50%,
-                #f093fb 100%
-              );
-            "
-          ></div>
-          <div class="card-info">
-            <div>
-              <div class="card-title">Ethereal</div>
-              <div class="card-author">
-                <div class="author-avatar"></div>
-                <span>Max</span>
-              </div>
-            </div>
-            <div class="card-price">
-              <div class="price-label">Current bid</div>
-              <div class="price-value">92.00 ETH</div>
-            </div>
-          </div>
-        </div>
+        <!-- Cards will be dynamically generated -->
       </div>
 
-      <div class="bottom-nav" id="bottomNav">
+      <!-- <div class="bottom-nav" id="bottomNav">
         <div class="nav-item active">
           <div class="nav-icon">🏠</div>
           <div class="nav-label">Home</div>
@@ -713,7 +641,10 @@
           <div class="nav-icon">🔥</div>
           <div class="nav-label">Trending</div>
         </div>
-
+        <div class="nav-item">
+          <div class="nav-icon">➕</div>
+          <div class="nav-label">Create</div>
+        </div>
         <div class="nav-item">
           <div class="nav-icon">♥</div>
           <div class="nav-label">Favorites</div>
@@ -722,7 +653,7 @@
           <div class="nav-icon">👤</div>
           <div class="nav-label">Profile</div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Detail Screen -->
       <div class="detail-screen" id="detailScreen">
@@ -817,7 +748,154 @@
     </div>
 
     <script>
+      // Card data
+      const cardsData = [
+        {
+          title: "Overload",
+          author: "Teddy",
+          time: "28h 16m 15s",
+          price: "88.00 ETH",
+          gradient:
+            "linear-gradient(135deg, #ff6b6b 0%, #ffe66d 50%, #4ecdc4 100%)",
+        },
+        {
+          title: "Dreamscape",
+          author: "Luna",
+          time: "15h 42m 08s",
+          price: "65.00 ETH",
+          gradient:
+            "linear-gradient(135deg, #a8e6cf 0%, #ffd3b6 50%, #ffaaa5 100%)",
+        },
+        {
+          title: "Ethereal",
+          author: "Max",
+          time: "22h 08m 31s",
+          price: "92.00 ETH",
+          gradient:
+            "linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)",
+        },
+      ];
+
+      let currentIndex = 0;
+
+      // Initialize cards
+      function initCards() {
+        const container = document.getElementById("cardsContainer");
+        container.innerHTML = "";
+
+        cardsData.forEach((card, index) => {
+          const cardElement = createCardElement(card, index);
+          container.appendChild(cardElement);
+        });
+
+        updateCardPositions();
+      }
+
+      // Create card element
+      function createCardElement(cardData, index) {
+        const card = document.createElement("div");
+        card.className = "nft-card";
+        card.innerHTML = `
+          <span class="time-badge">${cardData.time}</span>
+          <div class="card-image" style="background: ${cardData.gradient}"></div>
+          <div class="card-info">
+            <div>
+              <div class="card-title">${cardData.title}</div>
+              <div class="card-author">
+                <div class="author-avatar"></div>
+                <span>${cardData.author}</span>
+              </div>
+            </div>
+            <div class="card-price">
+              <div class="price-label">Current bid</div>
+              <div class="price-value">${cardData.price}</div>
+            </div>
+          </div>
+        `;
+
+        // Add click event to cycle cards or open detail
+        card.addEventListener("click", function (e) {
+          const position =
+            (index - currentIndex + cardsData.length) % cardsData.length;
+          if (position === 0) {
+            // Double tap detection for detail view
+            if (
+              card.dataset.lastClick &&
+              Date.now() - card.dataset.lastClick < 300
+            ) {
+              openDetail();
+            } else {
+              card.dataset.lastClick = Date.now();
+              cycleCards();
+            }
+          }
+        });
+
+        return card;
+      }
+
+      // Update card positions with stacking effect
+      function updateCardPositions() {
+        const cards = document.querySelectorAll(".nft-card");
+
+        cards.forEach((card, index) => {
+          const position =
+            (index - currentIndex + cardsData.length) % cardsData.length;
+
+          if (position === 0) {
+            // Top card
+            card.style.top = "0";
+            card.style.transform = "scale(1) rotate(0deg)";
+            card.style.opacity = "1";
+            card.style.zIndex = "3";
+            card.style.pointerEvents = "all";
+          } else if (position === 1) {
+            // Second card
+            card.style.top = "20px";
+            card.style.transform = "scale(0.95) rotate(0deg)";
+            card.style.opacity = "0.7";
+            card.style.zIndex = "2";
+            card.style.pointerEvents = "none";
+          } else {
+            // Third card
+            card.style.top = "40px";
+            card.style.transform = "scale(0.9) rotate(0deg)";
+            card.style.opacity = "0.4";
+            card.style.zIndex = "1";
+            card.style.pointerEvents = "none";
+          }
+        });
+      }
+
+      // Cycle to next card
+      function cycleCards() {
+        const cards = document.querySelectorAll(".nft-card");
+        const topCard = cards[currentIndex % cardsData.length];
+
+        // Animate top card out
+        topCard.style.transform = "translateX(400px) rotate(20deg) scale(0.8)";
+        topCard.style.opacity = "0";
+
+        setTimeout(() => {
+          currentIndex++;
+          updateCardPositions();
+        }, 300);
+      }
+
+      // Detail screen functions
       function openDetail() {
+        const topCard = cardsData[currentIndex % cardsData.length];
+
+        // Update detail screen with current card data
+        document.querySelector(".detail-title").textContent = topCard.title;
+        document.querySelector(".detail-time").textContent = topCard.time;
+        document.querySelector(".detail-card-image").style.background =
+          topCard.gradient;
+        document.querySelector(".detail-author-name").textContent =
+          topCard.author;
+        document.querySelector(".detail-price-value").textContent =
+          topCard.price;
+
         document.getElementById("header").classList.add("hidden");
         document.getElementById("cardsContainer").classList.add("hidden");
         document.getElementById("bottomNav").classList.add("hidden");
@@ -832,6 +910,17 @@
       }
 
       function openModal() {
+        const topCard = cardsData[currentIndex % cardsData.length];
+
+        // Update modal with current card data
+        document.querySelector(".modal-image").style.background =
+          topCard.gradient;
+        document.querySelectorAll(".modal-author-name").forEach((el) => {
+          el.textContent = topCard.author;
+        });
+        document.querySelector(".modal-price-value").textContent =
+          topCard.price;
+
         document.getElementById("modal").classList.add("active");
       }
 
@@ -848,6 +937,19 @@
           this.classList.add("active");
         });
       });
+
+      // Navigation item switching
+      document.querySelectorAll(".nav-item").forEach((navItem) => {
+        navItem.addEventListener("click", function () {
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((item) => item.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // Initialize on load
+      initCards();
     </script>
   </body>
 </html>
