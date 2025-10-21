@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Section</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .video-section {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .nav-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        z-index: 20;
+      }
+
+      .nav-button.prev {
+        left: -80px;
+      }
+
+      .nav-button.next {
+        right: -80px;
+      }
+
+      .nav-button:hover {
+        transform: translateY(-50%) scale(1.1);
+        background: white;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-button:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .nav-button svg {
+        width: 28px;
+        height: 28px;
+        fill: #333;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        background: #2d1b3d;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+      }
+
+      .video-wrapper {
+        position: relative;
+        padding-top: 177.78%;
+        background: #000;
+      }
+
+      .video-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .story-bars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        gap: 4px;
+        padding: 12px 16px;
+        z-index: 10;
+      }
+
+      .bar {
+        flex: 1;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .bar-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: white;
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+
+      .bar-progress.complete {
+        width: 100%;
+        transition: width 0.3s ease;
+      }
+
+      .user-info {
+        position: absolute;
+        top: 50px;
+        left: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
+      }
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        border: 2px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .username {
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .timestamp {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 13px;
+        margin-left: 8px;
+      }
+
+      .gradient-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+        z-index: 5;
+      }
+
+      .bottom-gradient {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+        z-index: 5;
+      }
+
+      .video-counter {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 12px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        color: #333;
+        font-size: 14px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 15;
+        opacity: 0;
+      }
+
+      .quick-nav {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 15;
+      }
+
+      .quick-nav-dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .quick-nav-dot.active {
+        background: white;
+        width: 24px;
+        border-radius: 4px;
+      }
+
+      .quick-nav-dot:hover {
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .click-area {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        z-index: 9;
+        cursor: pointer;
+      }
+
+      .click-left {
+        left: 0;
+      }
+
+      .click-right {
+        right: 0;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .video-container.animate {
+        animation: slideIn 0.3s ease;
+      }
+
+      @media (max-width: 768px) {
+        .nav-button {
+          width: 50px;
+          height: 50px;
+        }
+
+        .nav-button.prev {
+          left: -60px;
+        }
+
+        .nav-button.next {
+          right: -60px;
+        }
+
+        .video-counter {
+          top: auto;
+          bottom: 80px;
+          right: 50%;
+          transform: translateX(50%);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-button.prev {
+          left: 10px;
+        }
+
+        .nav-button.next {
+          right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-section">
+      <button
+        class="nav-button prev"
+        onclick="previousVideo()"
+        aria-label="Previous video"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+      </button>
+
+      <div class="video-container" id="videoContainer">
+        <div class="video-wrapper">
+          <div class="gradient-overlay"></div>
+          <div class="bottom-gradient"></div>
+
+          <div class="story-bars" id="storyBars"></div>
+
+          <div class="video-counter">
+            <span id="currentVideo">1</span> / <span id="totalVideos">3</span>
+          </div>
+
+          <div class="user-info">
+            <div class="avatar" id="avatar">JC</div>
+            <span class="username" id="username">jessicasu</span>
+            <span class="timestamp" id="timestamp">6h</span>
+          </div>
+
+          <div class="click-area click-left" onclick="previousVideo()"></div>
+          <div class="click-area click-right" onclick="nextVideo()"></div>
+
+          <video class="video-content" id="videoElement" playsinline muted>
+            <source src="" type="video/mp4" />
+          </video>
+
+          <div class="quick-nav" id="quickNav"></div>
+        </div>
+      </div>
+
+      <button
+        class="nav-button next"
+        onclick="nextVideo()"
+        aria-label="Next video"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </button>
+    </div>
+
+    <script>
+      const videos = [
+        {
+          id: 1,
+          videoUrl:
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          username: "jessicasu",
+          avatar: "JC",
+          timestamp: "6h",
+        },
+        {
+          id: 2,
+          videoUrl:
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+          username: "john_doe",
+          avatar: "JD",
+          timestamp: "3h",
+        },
+        {
+          id: 3,
+          videoUrl:
+            "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+          username: "sarah_k",
+          avatar: "SK",
+          timestamp: "1h",
+        },
+      ];
+
+      let currentIndex = 0;
+      const videoElement = document.getElementById("videoElement");
+      let progressInterval = null;
+
+      function createProgressBars() {
+        const storyBars = document.getElementById("storyBars");
+        storyBars.innerHTML = "";
+
+        videos.forEach((_, index) => {
+          const bar = document.createElement("div");
+          bar.className = "bar";
+          bar.innerHTML =
+            '<div class="bar-progress" id="progress-' + index + '"></div>';
+          storyBars.appendChild(bar);
+        });
+      }
+
+      function updateProgressBar() {
+        if (!videoElement.duration) return;
+
+        const progress =
+          (videoElement.currentTime / videoElement.duration) * 100;
+        const currentBar = document.getElementById("progress-" + currentIndex);
+
+        if (currentBar) {
+          currentBar.style.width = progress + "%";
+        }
+
+        if (videoElement.ended || progress >= 99.9) {
+          completeCurrentBar();
+          setTimeout(() => {
+            if (currentIndex < videos.length - 1) {
+              nextVideo();
+            }
+          }, 200);
+        }
+      }
+
+      function completeCurrentBar() {
+        const currentBar = document.getElementById("progress-" + currentIndex);
+        if (currentBar) {
+          currentBar.classList.add("complete");
+          currentBar.style.width = "100%";
+        }
+      }
+
+      function resetProgressBars() {
+        videos.forEach((_, index) => {
+          const bar = document.getElementById("progress-" + index);
+          if (bar) {
+            bar.classList.remove("complete");
+            if (index < currentIndex) {
+              bar.style.width = "100%";
+              bar.classList.add("complete");
+            } else if (index === currentIndex) {
+              bar.style.width = "0%";
+            } else {
+              bar.style.width = "0%";
+            }
+          }
+        });
+      }
+
+      function updateVideo() {
+        const video = videos[currentIndex];
+        const container = document.getElementById("videoContainer");
+
+        container.classList.remove("animate");
+        void container.offsetWidth;
+        container.classList.add("animate");
+
+        videoElement.src = video.videoUrl;
+        videoElement.load();
+
+        videoElement.play().catch((e) => {
+          console.log("Autoplay failed:", e);
+        });
+
+        document.getElementById("username").textContent = video.username;
+        document.getElementById("avatar").textContent = video.avatar;
+        document.getElementById("timestamp").textContent = video.timestamp;
+        document.getElementById("currentVideo").textContent = currentIndex + 1;
+        document.getElementById("totalVideos").textContent = videos.length;
+
+        resetProgressBars();
+        updateQuickNav();
+      }
+
+      function createQuickNav() {
+        const quickNav = document.getElementById("quickNav");
+        quickNav.innerHTML = "";
+        videos.forEach((_, index) => {
+          const dot = document.createElement("div");
+          dot.className = "quick-nav-dot";
+          if (index === currentIndex) {
+            dot.classList.add("active");
+          }
+          dot.onclick = (e) => {
+            e.stopPropagation();
+            completeCurrentBar();
+            currentIndex = index;
+            updateVideo();
+          };
+          quickNav.appendChild(dot);
+        });
+      }
+
+      function updateQuickNav() {
+        const dots = document.querySelectorAll(".quick-nav-dot");
+        dots.forEach((dot, index) => {
+          if (index === currentIndex) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+
+      function nextVideo() {
+        completeCurrentBar();
+        currentIndex = (currentIndex + 1) % videos.length;
+        updateVideo();
+      }
+
+      function previousVideo() {
+        completeCurrentBar();
+        currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+        updateVideo();
+      }
+
+      videoElement.addEventListener("timeupdate", updateProgressBar);
+
+      videoElement.addEventListener("ended", () => {
+        completeCurrentBar();
+        setTimeout(() => {
+          if (currentIndex < videos.length - 1) {
+            nextVideo();
+          }
+        }, 200);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+          nextVideo();
+        } else if (e.key === "ArrowLeft") {
+          previousVideo();
+        }
+      });
+
+      createProgressBars();
+      createQuickNav();
+      updateVideo();
+    </script>
+  </body>
+</html>
